@@ -1,0 +1,67 @@
+{
+  "metadata": {
+    "site": {
+      "title": "Metalsmith Boilerplate",
+      "author": "https://sowlmate.de",
+      "url": "https://example.com"
+    },
+    "google_tag_manager_id": "GTM-XXXXXXX"
+  },
+  "seo": {
+    "sitemap": "https://example.com/sitemap.xml",
+    "redirect": {}
+  },
+  "build": {
+    "source": "./",
+    "destination": "./dist",
+    "cache_busting": [
+      "bin/css.min.css",
+      "bin/vendor.min.js",
+      "bin/script.min.js"
+    ],
+    "assets": {
+      "source": "./public",
+      "destination": "./",
+      "bin": "./public/bin",
+      "css": {
+        "globs": [
+          "./public/_scss/**/*.scss",
+          "./public/css/**/*.css"
+        ],
+        "minified": "css.min.css"
+      },
+      "js": {
+        "globs": [
+          "./public/js/**/*.js"
+        ],
+        "minified": "script.min.js"
+      },
+      "vendor": {
+        "globs": [
+          "./public/vendor/**/*.js"
+        ],
+        "minified": "vendor.min.js"
+      },
+      "remote": {
+        "path": "./public/vendor/remote",
+        "files": []
+      }
+    }
+  },
+  "test": {
+    "linksToIgnore": [
+      "https://www.googletagmanager.com"
+    ]
+  },
+  "develop": {
+    "watch": [
+      "./layouts/**/*.html",
+      "./partials/**/*.html",
+      "./src/**/*.html",
+      "./src/**/*.html.handlebars",
+      "./public/_scss/**/*.scss",
+      "./public/css/**/*.css",
+      "./public/js/**/*.js"
+    ]
+  }
+}
