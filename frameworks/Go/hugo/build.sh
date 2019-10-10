@@ -192,13 +192,13 @@ esac
 if [ "${verbose_build}" == true ] ; then
     ls -sh "${content_folder}"
     echo "Number of File: ${number_of_files} with Content Size: ${content_size} and Min Runs: ${min_runs}"
-    command="hyperfine --min-runs ${min_runs} --show-output '${framework_build_verbose}'"
+    command="hyperfine --min-runs ${min_runs} --show-output '${framework_build_verbose}' &"
     echo "${command}"
     eval "${command}"
 else
     du -sh "${content_folder}"
     echo "Number of File: ${number_of_files} with Content Size: ${content_size} and Min Runs: ${min_runs}"
-    command="hyperfine --min-runs ${min_runs} --show-output '${framework_build_command}'"
+    command="hyperfine --min-runs ${min_runs} --show-output '${framework_build_command}' &"
     eval "${command}"
 fi
 

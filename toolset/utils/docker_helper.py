@@ -292,7 +292,7 @@ class DockerHelper:
         watch_container(
             self.server.containers.run(
                 "matheusrv/ssgberk.test.%s" % framework_test.name,
-                "/bin/bash ./%s" % (script),
+                "/bin/bash ./%s &" % (script),
                 environment=variables,
                 network=self.benchmarker.config.network,
                 network_mode=self.benchmarker.config.network_mode,
