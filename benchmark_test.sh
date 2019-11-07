@@ -32,5 +32,5 @@ clear &&  clear
 ./ssgberk -nf 10000   -cs 0.500   -mr 10
 # 5-05-10
 ./ssgberk -nf 100000  -cs 0.500   -mr 10
-# 6-5K-10
+# 6-05-10
 ./ssgberk -nf 1000000 -cs 0.500   -mr 10

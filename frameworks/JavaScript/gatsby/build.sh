@@ -11,7 +11,7 @@ if [ -z "${number_of_files}" ] ; then
 fi
 
 if [ -z "${content_size}" ] ; then
-    content_size=100
+    content_size="[500]"
 fi
 
 if [ -z "${min_runs}" ] ; then
@@ -120,6 +120,11 @@ generate_content()
             content+="${string}"
         done
     ;;
+    "[100000]")
+        for i in {1..200000} ; do
+            content+="${string}"
+        done
+    ;;
     *)
         content="${string}"
     ;;
@@ -191,14 +196,14 @@ esac
 # run benchmark
 if [ "${verbose_build}" == true ] ; then
     ls -sh "${content_folder}"
-    command="hyperfine --min-runs ${min_runs} --show-output '${framework_build_verbose}' &"
+    command="hyperfine --min-runs ${min_runs} --show-output '${framework_build_verbose} && sync && echo 3 > /proc/sys/vm/drop_caches' &"
     echo "${command}"
     eval "${command}"
     wait
     echo "Number of File: ${number_of_files} with Content Size: ${content_size} and Min Runs: ${min_runs}"
 else
     du -sh "${content_folder}"
-    command="hyperfine --min-runs ${min_runs} --show-output '${framework_build_command}' &"
+    command="hyperfine --min-runs ${min_runs} --show-output '${framework_build_command} && sync && echo 3 > /proc/sys/vm/drop_caches' &"
     eval "${command}"
     wait
     echo "Number of File: ${number_of_files} with Content Size: ${content_size} and Min Runs: ${min_runs}"
