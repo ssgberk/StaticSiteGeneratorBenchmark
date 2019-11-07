@@ -50,11 +50,11 @@ resolve_filename()
     filename=$(date +%F)
     filename+="-"
     filename+="${iterator_arg}"
-    resolver_header "${filename}" "${iterator_arg}"
+    resolve_header "${filename}" "${iterator_arg}"
     return 0
 }
 
-resolver_header()
+resolve_header()
 {
     title="${1}"
     iterator_arg="${2}"
@@ -196,14 +196,14 @@ esac
 # run benchmark
 if [ "${verbose_build}" == true ] ; then
     ls -sh "${content_folder}"
-    command="hyperfine --min-runs ${min_runs} --show-output '${framework_build_verbose} && sync && echo 3 > /proc/sys/vm/drop_caches' &"
+    command="hyperfine --time-unit second --min-runs ${min_runs} --max-runs ${min_runs} --show-output '${framework_build_verbose}'"
     echo "${command}"
     eval "${command}"
     wait
     echo "Number of File: ${number_of_files} with Content Size: ${content_size} and Min Runs: ${min_runs}"
 else
     du -sh "${content_folder}"
-    command="hyperfine --min-runs ${min_runs} --show-output '${framework_build_command} && sync && echo 3 > /proc/sys/vm/drop_caches' &"
+    command="hyperfine --time-unit second --min-runs ${min_runs} --max-runs ${min_runs} --ignore-failure --show-output '${framework_build_command}'"
     eval "${command}"
     wait
     echo "Number of File: ${number_of_files} with Content Size: ${content_size} and Min Runs: ${min_runs}"
